@@ -1,0 +1,56 @@
+.loginContainer {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  top: 300px;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.userOrAdmin {
+  border: 2px solid black;
+  padding: 10px;
+  font-size: xx-large;
+  gap: 5px;
+}
+
+.regularUser {
+  cursor: pointer;
+}
+
+.regularUser:hover {
+  color: red;
+}
+
+.admin {
+  cursor: pointer;
+}
+
+.admin:hover {
+  color: #29df29;
+}
+
+.loginButton {
+  font-size: x-large;
+}
+
+.loginButton:hover {
+  background-color: blue;
+}
+
+.movieListContainer {
+  border: 2px solid black;
+  height: 60%;
+  width: 60%;
+}
+
+.hidden {
+  display: none;
+}
+
+/*# sourceMappingURL=style.css.map */
