@@ -14,19 +14,36 @@
 
 </head>
 <body>
+<main>
 <div class="loginContainer d-flex">
     <button class="loginButton">Login</button>
     <div class="userOrAdmin d-flex flex1">
         <div class="regularUser border flex1">Regular user</div>
-        <div class="admin border flex1">Admin</div>
+        <div id="admin" class="border flex1">Admin</div>
     </div>
 </div>
-<div id="movieList" class="hidden">
+</main>
+<div class="movieList hidden">
     <h1>Movie list</h1>
     <div class="movieListContainer">
-    <button class="createNewMovie">Create new movie</button>
-        <div class=""></div>
+        <button id="createNewMovie">Create new movie</button>
+        <form id="newMovieForm" class="mb-3 hidden">
+            <div class="mb-3">
+                <label for="movieTitle" class="form-label">Movie Title</label>
+                <input type="text" class="form-control" id="movieTitle" required>
+            </div>
+            <div class="mb-3">
+                <label for="movieImage" class="form-label">Movie Image URL</label>
+                <input type="url" class="form-control" id="movieImage" required>
+            </div>
+            <div class="mb-3">
+                <label for="seatsTotal" class="form-label">Total Seats</label>
+                <input type="number" class="form-control" id="seatsTotal" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Movie</button>
+        </form>
     </div>
+    <button id="backToLogin">Back to login</button>
 </div>
 </body>
 </html>
