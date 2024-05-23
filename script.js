@@ -1,4 +1,4 @@
-const main=document.querySelector("main")
+const main = document.querySelector("main")
 
 const regularUser = document.querySelector(".regularUser");
 const adminUser = document.querySelector("#admin");
@@ -8,6 +8,8 @@ const createNewMovieButton = document.querySelector("#createNewMovie");
 const newMovieForm = document.querySelector("#newMovieForm");
 const movieListContainer = document.querySelector(".movieListContainer");
 const backToLoginButton = document.querySelector("#backToLogin");
+
+const seats = 8
 
 loginButton.addEventListener("click", () => {
 
@@ -49,7 +51,12 @@ function addMovie(title, image, seats) {
     movieImage.alt = title;
 
     const movieSeats = document.createElement("p");
-    movieSeats.textContent = `Total seats: ${seats}`;
+    movieSeats.textContent = `Total seats: ${seats}`
+    movieSeats.classList.add("movieSeatsClick")
+
+    movieSeats.addEventListener("click", () => {
+        window.location.href = "singleMoviePage.html";
+    });
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
@@ -58,6 +65,7 @@ function addMovie(title, image, seats) {
         movieItem.remove();
         removeMovieFromLocalStorage(title);
     });
+
 
     movieItem.appendChild(movieTitle);
     movieItem.appendChild(movieImage);
@@ -74,7 +82,7 @@ function saveMovieToLocalStorage(title, image, seats) {
     } else {
         movies = JSON.parse(movies);
     }
-    movies.push({ title, image, seats });
+    movies.push({title, image, seats});
     localStorage.setItem("movies", JSON.stringify(movies));
 }
 
@@ -96,4 +104,4 @@ function loadMoviesFromLocalStorage() {
     }
 }
 
- loadMoviesFromLocalStorage();
+loadMoviesFromLocalStorage();
