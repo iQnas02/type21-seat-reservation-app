@@ -50,9 +50,11 @@ function hideDeleteButtons() {
     });
 }
 createNewMovieButton.addEventListener("click", () => {
-    newMovieForm.classList.remove("hidden");
-    movieListContainer.classList.remove("hidden");
-    movieListContainer.style.display= "block"
+    if (currentUser ==="admin") {
+        newMovieForm.classList.remove("hidden");
+        movieListContainer.classList.remove("hidden");
+        movieListContainer.style.display= "block"
+    }
 });
 
 backToLoginButton.addEventListener("click", () => {
@@ -148,3 +150,6 @@ function clearMovieList() {
 
 }
 loadMoviesFromLocalStorage();
+if (currentUser=== "regular"){
+    createNewMovieButton.style.display = "none";
+}
