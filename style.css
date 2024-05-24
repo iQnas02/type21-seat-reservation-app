@@ -77,11 +77,27 @@ img {
 }
 
 .singleMoviePageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   border: 2px solid black;
-  padding: 10px;
+  padding: 20px;
+  position: relative;
+  object-fit: scale-down;
+}
+
+.singleMoviePageTitle {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .moviePageSeats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   border: 1px solid black;
   padding: 10px;
   flex-wrap: wrap;
@@ -120,6 +136,7 @@ img {
 }
 
 .movieImageSinglePage {
+  position: relative;
   float: left;
 }
 
