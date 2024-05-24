@@ -1,5 +1,6 @@
+import { initializeSingleMoviePage } from './singleMoviePage.js';
 
-const main = document.querySelector("main")
+const main = document.querySelector("main");
 
 const regularUser = document.querySelector(".regularUser");
 const adminUser = document.querySelector("#admin");
@@ -9,33 +10,32 @@ const newMovieForm = document.querySelector("#newMovieForm");
 const movieListContainer = document.querySelector(".movieListContainer");
 const backToLoginButton = document.querySelector("#backToLogin");
 
-
-const seats = 0;
 let currentUser = "";
 
-
-
+// Event listeners for user role selection
 regularUser.addEventListener("click", () => {
     regularUser.classList.add("selected");
     adminUser.classList.remove("selected");
-    currentUser= "regular";
+    currentUser = "regular";
     movieList.classList.remove("hidden");
     main.classList.add("hidden");
-    createNewMovieButton.classList.add("hidden")
+    createNewMovieButton.classList.add("hidden");
     hideDeleteButtons();
     loadMoviesFromLocalStorage();
 });
+
 adminUser.addEventListener("click", () => {
     adminUser.classList.add("selected");
     regularUser.classList.remove("selected");
     currentUser = "admin";
     movieList.classList.remove("hidden");
-    createNewMovieButton.classList.remove("hidden")
+    createNewMovieButton.classList.remove("hidden");
     createNewMovieButton.style.display = "block";
     main.classList.add("hidden");
     showDeleteButtons();
     loadMoviesFromLocalStorage();
-})
+});
+
 function showDeleteButtons() {
     const deleteButtons = document.querySelectorAll(".deleteButton");
     deleteButtons.forEach(button => {
@@ -49,11 +49,12 @@ function hideDeleteButtons() {
         button.style.display = "none";
     });
 }
+
 createNewMovieButton.addEventListener("click", () => {
-    if (currentUser ==="admin") {
+    if (currentUser === "admin") {
         newMovieForm.classList.remove("hidden");
         movieListContainer.classList.remove("hidden");
-        movieListContainer.style.display= "block"
+        movieListContainer.style.display = "block";
     }
 });
 
@@ -61,7 +62,6 @@ backToLoginButton.addEventListener("click", () => {
     movieList.classList.add("hidden");
     newMovieForm.classList.add("hidden");
     main.classList.remove("hidden");
-
 });
 
 newMovieForm.addEventListener("submit", (event) => {
@@ -77,8 +77,8 @@ newMovieForm.addEventListener("submit", (event) => {
 });
 
 function addMovie(title, image, seats) {
-    const movieItem = document.createElement("div1");
-    movieItem.classList.add("movieItem1");
+    const movieItem = document.createElement("div");
+    movieItem.classList.add("movieItem");
 
     const movieTitle = document.createElement("h3");
     movieTitle.textContent = title;
@@ -88,20 +88,18 @@ function addMovie(title, image, seats) {
     movieImage.alt = title;
 
     const movieSeats = document.createElement("p");
-    movieSeats.textContent = `🆕Total seats: ${seats}`
-    movieSeats.classList.add("movieSeatsClick")
+    movieSeats.textContent = `Total seats: ${seats}`;
+    movieSeats.classList.add("movieSeatsClick");
 
     movieSeats.addEventListener("click", () => {
-        window.location.href = "singleMoviePage.html";
+        initializeSingleMoviePage(currentUser === "admin", title, image, seats);
     });
-    console.log("Current User:", currentUser); // Add this line for debugging
 
     if (currentUser === "admin") {
-        console.log("Adding delete button for admin"); // Add this line for debugging
-
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
-        deleteButton.classList.add("btn", "btn-danger", "deleteButton");        deleteButton.addEventListener("click", () => {
+        deleteButton.classList.add("btn", "btn-danger", "deleteButton");
+        deleteButton.addEventListener("click", () => {
             movieItem.remove();
             removeMovieFromLocalStorage(title);
         });
@@ -123,7 +121,7 @@ function saveMovieToLocalStorage(title, image, seats) {
     } else {
         movies = JSON.parse(movies);
     }
-    movies.push({title, image, seats});
+    movies.push({ title, image, seats });
     localStorage.setItem("movies", JSON.stringify(movies));
 }
 
@@ -145,11 +143,13 @@ function loadMoviesFromLocalStorage() {
         });
     }
 }
+
 function clearMovieList() {
     movieListContainer.innerHTML = "";
-
 }
+
 loadMoviesFromLocalStorage();
-if (currentUser=== "regular"){
+
+if (currentUser === "regular") {
     createNewMovieButton.style.display = "none";
 }

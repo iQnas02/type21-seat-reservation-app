@@ -102,4 +102,20 @@ img {
   align-items: center;
 }
 
+.seat {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  background-color: green;
+  cursor: pointer;
+}
+
+.seat.reserved {
+  background-color: yellow;
+}
+
+.seat.booked {
+  background-color: red;
+}
+
 /*# sourceMappingURL=style.css.map */
