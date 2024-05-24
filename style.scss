@@ -1,4 +1,3 @@
-
 .loginContainer {
   justify-content: center;
   align-items: center;
@@ -18,7 +17,6 @@
   padding: 10px;
   font-size: xx-large;
   gap: 5px;
-
 }
 
 .regularUser {
@@ -49,44 +47,53 @@
   display: flex;
   gap: 5px;
   border: 2px solid black;
-  height: 60%;
+  height: 80%;
   width: 100%;
 }
-.hidden{
+
+.hidden {
   display: none;
 }
 
-.movieItem {
+.movieItem1 {
   border: 1px solid #ccc;
   padding: 15px;
   margin-bottom: 10px;
-
+}
+img{
+  height: 300px;
+  width: 300px;
 }
 .movieItem img {
   width: 300px;
   height: 300px;
 }
-.movieSeatsClick{
+
+.movieSeatsClick {
   cursor: pointer;
 }
-.singleMoviePageContainer{
+
+.singleMoviePageContainer {
   border: 2px solid black;
   padding: 10px;
 }
-.moviePageSeats{
+
+.moviePageSeats {
   border: 1px solid black;
   padding: 10px;
   flex-wrap: wrap;
   gap: 5px;
   width: 32%;
 }
-.div{
+
+.div {
   border: 1px solid black;
   background-color: greenyellow;
   height: 50px;
-  width:50px;
+  width: 50px;
 }
-.mainMoviePage{
+
+.mainMoviePage {
   display: flex;
   flex-direction: column;
   justify-content: center;
