@@ -5,6 +5,7 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     singleMoviePage.classList.remove("hidden");
     movieList.classList.add("hidden");
 
+    const singleMoviePageContainer = document.querySelector('.singleMoviePageContainer');
     const singleMoviePageTitle = document.querySelector('.singleMoviePageTitle');
     const moviePageImage = document.querySelector('.moviePageImage');
     const moviePageSeats = document.querySelector('.moviePageSeats');
@@ -26,6 +27,15 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
         if (singleMoviePageTitle) {
             const availableSeats = totalSeats - bookedSeats.length;
             singleMoviePageTitle.textContent = `${title} - Available seats: ${availableSeats} of ${totalSeats}`;
+        }
+        const existingMovieImage = singleMoviePageContainer.querySelector('.movieImageSinglePage');
+
+        if (!existingMovieImage) {
+            const movieImage = document.createElement('img');
+            movieImage.classList.add('movieImageSinglePage');
+            movieImage.src = image;
+            movieImage.alt = title;
+            singleMoviePageContainer.appendChild(movieImage);
         }
     }
 
