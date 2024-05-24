@@ -9,8 +9,11 @@ const createNewMovieButton = document.querySelector("#createNewMovie");
 const newMovieForm = document.querySelector("#newMovieForm");
 const movieListContainer = document.querySelector(".movieListContainer");
 const backToLoginButton = document.querySelector("#backToLogin");
+const errorMessage = document.querySelector("#errorMessage"); // Error message element
+
 
 let currentUser = "";
+
 
 // Event listeners for user role selection
 regularUser.addEventListener("click", () => {
@@ -68,7 +71,14 @@ newMovieForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = document.querySelector("#movieTitle").value;
     const image = document.querySelector("#movieImage").value;
-    const seats = document.querySelector("#seatsTotal").value;
+    const seats = parseInt(document.querySelector("#seatsTotal").value, 10);
+
+    if (seats < 1 || seats > 50) {
+        errorMessage.textContent = "Total seats must be between 1 and 50.";
+        return;
+    }
+
+    errorMessage.textContent = ""; // Clear error message
 
     addMovie(title, image, seats);
     saveMovieToLocalStorage(title, image, seats);

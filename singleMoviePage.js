@@ -10,8 +10,8 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     const moviePageSeats = document.querySelector('.moviePageSeats');
     const reserveSeatsButton = document.querySelector('.reserveSeats');
     const cancelReservationButton = document.querySelector('.cancelReservation');
-    let reservedSeats = 0;
-    let bookedSeats = 0;
+
+    let bookedSeats = JSON.parse(localStorage.getItem(`${title}_bookedSeats`)) || [];
 
     // Set the movie title and image
     if (singleMoviePageTitle) {
@@ -24,7 +24,8 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     // Function to update the seat count display
     function updateSeatCount() {
         if (singleMoviePageTitle) {
-            singleMoviePageTitle.textContent = `${title} - Seats booked: ${bookedSeats}/${totalSeats}`;
+            const availableSeats = totalSeats - bookedSeats.length;
+            singleMoviePageTitle.textContent = `${title} - Available seats: ${availableSeats} of ${totalSeats}`;
         }
     }
 
@@ -39,18 +40,14 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
         seatDiv.classList.add('seat');
         seatDiv.textContent = i;
 
+        if (bookedSeats.includes(i)) {
+            seatDiv.classList.add('booked');
+        }
+
         // Add event listener for regular users
-        if (!isAdmin && moviePageSeats) {
+        if (!isAdmin && !bookedSeats.includes(i) && moviePageSeats) {
             seatDiv.addEventListener('click', () => {
-                if (!seatDiv.classList.contains('booked')) {
-                    if (seatDiv.classList.contains('reserved')) {
-                        seatDiv.classList.remove('reserved');
-                        reservedSeats--;
-                    } else {
-                        seatDiv.classList.add('reserved');
-                        reservedSeats++;
-                    }
-                }
+                seatDiv.classList.toggle('reserved');
             });
         }
 
@@ -60,26 +57,30 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     }
 
     // Event listener for reserve seats button
-    if (reserveSeatsButton) {
+    if (reserveSeatsButton && !isAdmin) {
         reserveSeatsButton.addEventListener('click', () => {
-            if (isAdmin) return; // Only regular users can reserve seats
             document.querySelectorAll('.seat.reserved').forEach(seat => {
-                seat.classList.add('booked');
                 seat.classList.remove('reserved');
-                bookedSeats++;
+                seat.classList.add('booked');
+                bookedSeats.push(parseInt(seat.textContent));
             });
+            localStorage.setItem(`${title}_bookedSeats`, JSON.stringify(bookedSeats));
             updateSeatCount();
         });
     }
 
     // Event listener for cancel reservation button (admin only)
-    if (cancelReservationButton) {
+    if (cancelReservationButton && isAdmin) {
         cancelReservationButton.addEventListener('click', () => {
-            if (!isAdmin) return; // Only admins can cancel reservations
             document.querySelectorAll('.seat.booked').forEach(seat => {
+                const seatNumber = parseInt(seat.textContent);
+                const index = bookedSeats.indexOf(seatNumber);
+                if (index !== -1) {
+                    bookedSeats.splice(index, 1);
+                }
                 seat.classList.remove('booked');
-                bookedSeats--;
             });
+            localStorage.setItem(`${title}_bookedSeats`, JSON.stringify(bookedSeats));
             updateSeatCount();
         });
     }
@@ -87,3 +88,4 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     // Initial update of seat count display
     updateSeatCount();
 }
+

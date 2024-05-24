@@ -49,6 +49,7 @@
   border: 2px solid black;
   height: 80%;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .hidden {
