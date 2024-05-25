@@ -6,6 +6,7 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     movieList.classList.add("hidden");
 
 
+
     const singleMoviePageContainer = document.querySelector('.singleMoviePageContainer');
     const singleMoviePageTitle = document.querySelector('.singleMoviePageTitle');
     const moviePageImage = document.querySelector('.moviePageImage');
@@ -13,7 +14,9 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     const reserveSeatsButton = document.querySelector('.reserveSeats');
     const cancelReservationButton = document.querySelector('.cancelReservation');
 
-
+    if(!isAdmin){
+        cancelReservationButton.style.display="none"
+    }
 
     let bookedSeats = JSON.parse(localStorage.getItem(`${title}_bookedSeats`)) || [];
 
@@ -86,6 +89,7 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
             });
             localStorage.setItem(`${title}_bookedSeats`, JSON.stringify(bookedSeats));
             updateSeatCount();
+
         });
     }
 
@@ -93,15 +97,18 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     if (newCancelReservationButton && isAdmin) {
         newCancelReservationButton.addEventListener('click', () => {
             document.querySelectorAll('.seat.booked').forEach(seat => {
+
                 const seatNumber = parseInt(seat.textContent);
                 const index = bookedSeats.indexOf(seatNumber);
                 if (index !== -1) {
                     bookedSeats.splice(index, 1);
                 }
                 seat.classList.remove('booked');
+
             });
             localStorage.setItem(`${title}_bookedSeats`, JSON.stringify(bookedSeats));
             updateSeatCount();
+
         });
     }
 

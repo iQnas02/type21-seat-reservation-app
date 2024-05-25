@@ -10,6 +10,7 @@ const newMovieForm = document.querySelector("#newMovieForm");
 const movieListContainer = document.querySelector(".movieListContainer");
 const backToLoginButton = document.querySelector("#backToLogin");
 const errorMessage = document.querySelector("#errorMessage"); // Error message element
+const cancelReservationButton = document.querySelector('.cancelReservation');
 
 
 let currentUser = "";
@@ -103,6 +104,7 @@ function addMovie(title, image, seats) {
 
     movieSeats.addEventListener("click", () => {
         initializeSingleMoviePage(currentUser === "admin", title, image, seats);
+
     });
 
 
