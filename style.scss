@@ -1,3 +1,9 @@
+body{
+  background-image: url("9.e5cdc6cec55c6359d79440532a53041f.jpg");
+  opacity: 0.7;
+
+
+}
 .loginContainer {
   justify-content: center;
   align-items: center;
@@ -74,6 +80,7 @@ img {
 
 .movieSeatsClick {
   cursor: pointer;
+  font-weight: bold;
 }
 
 .singleMoviePageContainer {
@@ -116,7 +123,7 @@ img {
 
 .mainMoviePage {
   display: none;
-  //display: flex;
+  margin: 120px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -144,4 +151,10 @@ img {
   position: relative;
   float: left;
 
+}
+.movieList{
+  margin: 80px;
+}
+button:hover{
+  border-color: chartreuse;
 }
