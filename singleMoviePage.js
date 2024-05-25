@@ -5,12 +5,15 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     singleMoviePage.classList.remove("hidden");
     movieList.classList.add("hidden");
 
+
     const singleMoviePageContainer = document.querySelector('.singleMoviePageContainer');
     const singleMoviePageTitle = document.querySelector('.singleMoviePageTitle');
     const moviePageImage = document.querySelector('.moviePageImage');
     const moviePageSeats = document.querySelector('.moviePageSeats');
     const reserveSeatsButton = document.querySelector('.reserveSeats');
     const cancelReservationButton = document.querySelector('.cancelReservation');
+
+
 
     let bookedSeats = JSON.parse(localStorage.getItem(`${title}_bookedSeats`)) || [];
 
@@ -66,9 +69,16 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
         }
     }
 
+    // Remove any existing event listeners
+    const newReserveSeatsButton = reserveSeatsButton.cloneNode(true);
+    reserveSeatsButton.parentNode.replaceChild(newReserveSeatsButton, reserveSeatsButton);
+
+    const newCancelReservationButton = cancelReservationButton.cloneNode(true);
+    cancelReservationButton.parentNode.replaceChild(newCancelReservationButton, cancelReservationButton);
+
     // Event listener for reserve seats button
-    if (reserveSeatsButton && !isAdmin) {
-        reserveSeatsButton.addEventListener('click', () => {
+    if (newReserveSeatsButton && !isAdmin) {
+        newReserveSeatsButton.addEventListener('click', () => {
             document.querySelectorAll('.seat.reserved').forEach(seat => {
                 seat.classList.remove('reserved');
                 seat.classList.add('booked');
@@ -80,8 +90,8 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     }
 
     // Event listener for cancel reservation button (admin only)
-    if (cancelReservationButton && isAdmin) {
-        cancelReservationButton.addEventListener('click', () => {
+    if (newCancelReservationButton && isAdmin) {
+        newCancelReservationButton.addEventListener('click', () => {
             document.querySelectorAll('.seat.booked').forEach(seat => {
                 const seatNumber = parseInt(seat.textContent);
                 const index = bookedSeats.indexOf(seatNumber);
@@ -98,4 +108,3 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     // Initial update of seat count display
     updateSeatCount();
 }
-

@@ -105,6 +105,7 @@ function addMovie(title, image, seats) {
         initializeSingleMoviePage(currentUser === "admin", title, image, seats);
     });
 
+
     if (currentUser === "admin") {
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
@@ -123,6 +124,22 @@ function addMovie(title, image, seats) {
 
     movieListContainer.appendChild(movieItem);
 }
+
+movieListContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("movieSeatsClick")) {
+        const movieItem = event.target.closest(".movieItem");
+        const title = movieItem.querySelector("h3").textContent;
+        const image = movieItem.querySelector("img").src;
+        const seats = parseInt(movieItem.querySelector("p").textContent.replace("Total seats: ", ""), 10);
+
+        initializeSingleMoviePage(currentUser === "admin", title, image, seats);
+        const singleMoviePage = document.querySelector(".mainMoviePage");
+
+        singleMoviePage.classList.remove("hidden");
+        singleMoviePage.style.display = "block";
+        movieList.classList.add("hidden");
+    }
+});
 
 function saveMovieToLocalStorage(title, image, seats) {
     let movies = localStorage.getItem("movies");
