@@ -17,6 +17,9 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     if(!isAdmin){
         cancelReservationButton.style.display="none"
     }
+    if(isAdmin){
+        reserveSeatsButton.style.display="none"
+    }
 
     let bookedSeats = JSON.parse(localStorage.getItem(`${title}_bookedSeats`)) || [];
 
