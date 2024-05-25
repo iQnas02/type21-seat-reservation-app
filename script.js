@@ -1,4 +1,4 @@
-import { initializeSingleMoviePage } from './singleMoviePage.js';
+import {initializeSingleMoviePage} from './singleMoviePage.js';
 
 const main = document.querySelector("main");
 
@@ -10,8 +10,8 @@ const newMovieForm = document.querySelector("#newMovieForm");
 const movieListContainer = document.querySelector(".movieListContainer");
 const backToLoginButton = document.querySelector("#backToLogin");
 const errorMessage = document.querySelector("#errorMessage"); // Error message element
-const errorMessageTwo = document.querySelector("#errorMessageCreate"); // Error message element
-
+const backToMovieList = document.querySelector(".backToMovieList");
+const singleMoviePage = document.querySelector(".mainMoviePage");
 
 let currentUser = "";
 
@@ -24,6 +24,7 @@ regularUser.addEventListener("click", () => {
     movieList.classList.remove("hidden");
     main.classList.add("hidden");
     createNewMovieButton.classList.add("hidden");
+    createNewMovieButton.style.display = "none";
     hideDeleteButtons();
     loadMoviesFromLocalStorage();
 });
@@ -56,12 +57,13 @@ function hideDeleteButtons() {
 
 createNewMovieButton.addEventListener("click", () => {
     if (currentUser === "admin") {
+
         newMovieForm.classList.remove("hidden");
         movieListContainer.classList.remove("hidden");
         movieListContainer.style.display = "block";
-    } else{
-        errorMessageTwo.textContent="You are not admin!"
     }
+
+
 });
 
 backToLoginButton.addEventListener("click", () => {
@@ -69,6 +71,16 @@ backToLoginButton.addEventListener("click", () => {
     newMovieForm.classList.add("hidden");
     main.classList.remove("hidden");
 });
+if (backToMovieList) {
+    backToMovieList.addEventListener("click", () => {
+        singleMoviePage.style.display= "none"
+        newMovieForm.classList.add("hidden");
+        main.classList.add("hidden");
+        movieList.classList.remove("hidden");
+
+
+    })
+}
 
 newMovieForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -152,7 +164,7 @@ function saveMovieToLocalStorage(title, image, seats) {
     } else {
         movies = JSON.parse(movies);
     }
-    movies.push({ title, image, seats });
+    movies.push({title, image, seats});
     localStorage.setItem("movies", JSON.stringify(movies));
 }
 
