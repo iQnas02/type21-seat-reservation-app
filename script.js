@@ -1,7 +1,6 @@
 import {initializeSingleMoviePage} from './singleMoviePage.js';
 
 const main = document.querySelector("main");
-
 const regularUser = document.querySelector(".regularUser");
 const adminUser = document.querySelector("#admin");
 const movieList = document.querySelector(".movieList");
@@ -71,14 +70,13 @@ backToLoginButton.addEventListener("click", () => {
     newMovieForm.classList.add("hidden");
     main.classList.remove("hidden");
 });
+
 if (backToMovieList) {
     backToMovieList.addEventListener("click", () => {
-        singleMoviePage.style.display= "none"
+        singleMoviePage.style.display = "none"
         newMovieForm.classList.add("hidden");
         main.classList.add("hidden");
         movieList.classList.remove("hidden");
-
-
     })
 }
 
@@ -120,7 +118,6 @@ function addMovie(title, image, seats) {
         initializeSingleMoviePage(currentUser === "admin", title, image, seats);
 
     });
-
 
     if (currentUser === "admin") {
         const deleteButton = document.createElement("button");
@@ -194,6 +191,4 @@ function clearMovieList() {
 
 loadMoviesFromLocalStorage();
 
-if (currentUser === "regular") {
-    createNewMovieButton.style.display = "none";
-}
+

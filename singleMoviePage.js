@@ -5,8 +5,6 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     singleMoviePage.classList.remove("hidden");
     movieList.classList.add("hidden");
 
-
-
     const singleMoviePageContainer = document.querySelector('.singleMoviePageContainer');
     const singleMoviePageTitle = document.querySelector('.singleMoviePageTitle');
     const moviePageImage = document.querySelector('.moviePageImage');
@@ -14,11 +12,11 @@ export function initializeSingleMoviePage(isAdmin, title, image, totalSeats) {
     const reserveSeatsButton = document.querySelector('.reserveSeats');
     const cancelReservationButton = document.querySelector('.cancelReservation');
 
-    if(!isAdmin){
-        cancelReservationButton.style.display="none"
+    if (!isAdmin) {
+        cancelReservationButton.style.display = "none"
     }
-    if(isAdmin){
-        reserveSeatsButton.style.display="none"
+    if (isAdmin) {
+        reserveSeatsButton.style.display = "none"
     }
 
     let bookedSeats = JSON.parse(localStorage.getItem(`${title}_bookedSeats`)) || [];
