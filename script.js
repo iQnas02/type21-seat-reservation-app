@@ -10,7 +10,7 @@ const newMovieForm = document.querySelector("#newMovieForm");
 const movieListContainer = document.querySelector(".movieListContainer");
 const backToLoginButton = document.querySelector("#backToLogin");
 const errorMessage = document.querySelector("#errorMessage"); // Error message element
-const cancelReservationButton = document.querySelector('.cancelReservation');
+const errorMessageTwo = document.querySelector("#errorMessageCreate"); // Error message element
 
 
 let currentUser = "";
@@ -59,6 +59,8 @@ createNewMovieButton.addEventListener("click", () => {
         newMovieForm.classList.remove("hidden");
         movieListContainer.classList.remove("hidden");
         movieListContainer.style.display = "block";
+    } else{
+        errorMessageTwo.textContent="You are not admin!"
     }
 });
 
@@ -160,6 +162,7 @@ function removeMovieFromLocalStorage(title) {
         movies = JSON.parse(movies);
         movies = movies.filter(movie => movie.title !== title);
         localStorage.setItem("movies", JSON.stringify(movies));
+
     }
 }
 

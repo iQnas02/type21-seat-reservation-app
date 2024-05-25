@@ -155,4 +155,8 @@ button:hover {
   border-color: chartreuse;
 }
 
+#errorMessageCreate {
+  font-size: xx-large;
+}
+
 /*# sourceMappingURL=style.css.map */
